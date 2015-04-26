@@ -5,7 +5,10 @@
 This is a prototype of porting [ECharts](http://echarts.baidu.com) into R using **htmlwidgets**. I only spent a few days on it last year, and I hope more R users can contribute to it. To install this package:
 
 ```r
-install.packages('recharts', repos = c('http://yihui.name/xran', 'http://cran.rstudio.com'))
+install.packages(
+  'recharts',
+  repos = c('http://yihui.name/xran', 'http://cran.rstudio.com')
+)
 ```
 
 Some "hello world" examples:

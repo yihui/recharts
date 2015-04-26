@@ -1,6 +1,6 @@
 # recharts
 
-
+[![Build Status](https://travis-ci.org/yihui/recharts.svg)](https://travis-ci.org/yihui/recharts)
 
 This is a prototype of porting [ECharts](http://echarts.baidu.com) into R using **htmlwidgets**. I only spent a few days on it last year, and I hope more R users can contribute to it. To install this package:
 

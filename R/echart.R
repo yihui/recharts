@@ -39,9 +39,17 @@ echart.data.frame = function(
   series = evalFormula(series, data)
   data_fun = getFromNamespace(paste0('data_', type), 'recharts')
 
+  ###start axis from 0
+  min_xaxis = ifelse( min(x) >0, 0, min(x))
+  min_yaxis = ifelse( min(y) >0, 0, min(y))
+
   params = structure(list(
     series = data_fun(x, y, series),
-    xAxis = list(), yAxis = list()
+    xAxis = list(
+
+    ), yAxis = list(
+
+    )
   ), meta = list(
     x = x, y = y
   ))
@@ -51,7 +59,8 @@ echart.data.frame = function(
     'echarts', params, width = width, height = height, package = 'recharts',
     dependencies = getDependency(NULL)
   )
-  chart %>% eAxis('x', name = xlab) %>% eAxis('y', name = ylab)
+  ###start both axes from 0.
+  chart %>% eAxis('x', name = xlab,  min = min_yaxis) %>% eAxis('y', name = ylab,  min = min_xaxis)
 }
 
 #' @export

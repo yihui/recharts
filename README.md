@@ -25,4 +25,4 @@ See the package vignette for more information if you want to contribute:
 vignette('design', package = 'recharts')
 ```
 
-See https://github.com/taiyun/recharts for a similar project that we worked on before. Without the belssings of **htmlwidgets**, it is much more difficult to maintain that project. I hope this one can grow into a truly nice and exciting package.
+See https://github.com/taiyun/recharts for a similar project that we worked on before. Without the blessings of **htmlwidgets**, it is much more difficult to maintain that project. I hope this one can grow into a truly nice and exciting package.

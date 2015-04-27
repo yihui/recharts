@@ -27,3 +27,20 @@ data_bar = function(x, y, series = NULL) {
   }
   obj
 }
+
+data_line = function(x, y, series = NULL) {
+  ### if no series passed... go with only one series.
+  if (is.null(series)) {
+    warning("No series specified for bar plot.")
+    return(list(list(name = '', type = 'line', data = y)))
+  }
+  #otherwise, go with series.
+  xy = y ### why no names?
+  xy = split(as.data.frame(xy), series)
+  nms = names(xy)
+  obj = list()
+  for (i in seq_along(xy)) {
+    obj[[i]] = list(name = nms[i], type = 'line', data = unname(unlist(xy[[i]])))
+  }
+  obj
+}

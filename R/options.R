@@ -21,6 +21,9 @@ eAxis = function(
   odata = getMeta(chart)[[which]]  # original data along the axis
   if (missing(type)) type = axisType(odata, which)
   if (missing(position)) position = if (which == 'x') 'bottom' else 'left'
+  if (missing(data) && type == 'category') {
+    data = I(levels(as.factor(odata)))
+  }
 
   x = chart$x
   i = paste0(which, 'Axis')

@@ -56,10 +56,6 @@ echart.data.frame = function(
   series = evalFormula(series, data)
   data_fun = getFromNamespace(paste0('data_', type), 'recharts')
 
-  ###start axis from 0?
-  if (is.numeric(x)) min_xaxis = ifelse( min(x) >0, 0, min(x))
-  if (is.numeric(y)) min_yaxis = ifelse( min(y) >0, 0, min(y))
-
   params = structure(list(
     series = data_fun(x, y, series),
     xAxis = list(), yAxis = list()
@@ -75,14 +71,8 @@ echart.data.frame = function(
     'echarts', params, width = width, height = height, package = 'recharts',
     dependencies = getDependency(NULL)
   )
-  ###start both axes from 0.
-  ###but why would you ever want to start a scatter plot from 0? so turn it back.
 
-
-  if (type == "scatter") return (chart %>% eAxis('x', name = xlab) %>% eAxis('y', name = ylab))
-  if (type == "bar") return (chart %>% eAxis('x', name = xlab, data = unique(x)) %>% eAxis('y', name = ylab, min = min_yaxis))
-  if (type == "line") return (chart %>% eAxis('x', name = xlab, data = unique(x)) %>% eAxis('y', name = ylab, min = min_yaxis))
-
+  chart %>% eAxis('x', name = xlab) %>% eAxis('y', name = ylab)
 }
 
 #' @export

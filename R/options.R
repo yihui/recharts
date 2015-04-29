@@ -38,14 +38,14 @@ eAxis = function(
 
 #' @export
 #' @rdname axis
-eXAxis = function(chart, position = 'bottom', ...) {
-  eAxis(chart, position = position, ...)
+eXAxis = function(chart, ...) {
+  eAxis(chart, which = 'x', ...)
 }
 
 #' @export
 #' @rdname axis
-eYAxis = function(chart, position = 'left', ...) {
-  eAxis(chart, position = position, ...)
+eYAxis = function(chart, ...) {
+  eAxis(chart, which = 'y', ...)
 }
 
 axisType = function(data, which = c('x', 'y')) {

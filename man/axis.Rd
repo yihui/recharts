@@ -12,9 +12,9 @@ eAxis(chart, which = c("x", "y"), type = c("value", "category", "time"), show = 
         onZero = FALSE), axisTick = list(show = FALSE), axisLabel = list(show = TRUE), 
     splitLine = list(show = TRUE), splitArea = list(show = FALSE), data = list())
 
-eXAxis(chart, position = "bottom", ...)
+eXAxis(chart, ...)
 
-eYAxis(chart, position = "left", ...)
+eYAxis(chart, ...)
 }
 \description{
 Add an axis to a chart.

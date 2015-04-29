@@ -7,8 +7,20 @@
 #' @rdname eChart
 #' @export
 #' @examples library(recharts)
+#' ### scatter plot
 #' echart(iris, ~ Sepal.Length, ~ Sepal.Width)
 #' echart(iris, ~ Sepal.Length, ~ Sepal.Width, series = ~ Species)
+#'
+#' # bar chart
+#' bar_df = data.frame(
+#'    date = rep(paste("day",1:10), 2),
+#'    temperature = floor(rnorm(n = 20, mean = 20, sd = 10)),
+#'    location = rep(c("NY","DC"), each = 10)
+#'   )
+#' echart(bar_df, ~date, ~temperature, ~location)
+#'
+#' #line chart
+#' echart(bar_df, ~date, ~temperature, ~location, type="line")
 echart = function(data, ...) {
   UseMethod('echart')
 }
@@ -36,13 +48,22 @@ echart.data.frame = function(
   x = evalFormula(x, data)
   y = evalFormula(y, data)
   if (type == 'auto') type = determineType(x, y)
+
+  #for bar plot, convert x  to factors
+  if (type == 'bar' && !is.factor(x)) x = as.factor(x)
+  if (type == 'bar' && !is.numeric(y)) stop("y must be numeric for bar plot.")
+
   series = evalFormula(series, data)
   data_fun = getFromNamespace(paste0('data_', type), 'recharts')
+
+  ###start axis from 0?
+  if (is.numeric(x)) min_xaxis = ifelse( min(x) >0, 0, min(x))
+  if (is.numeric(y)) min_yaxis = ifelse( min(y) >0, 0, min(y))
 
   params = structure(list(
     series = data_fun(x, y, series),
     xAxis = list(), yAxis = list()
-  ), meta = list(
+    ), meta = list(
     x = x, y = y
   ))
   if (!is.null(series)) params$legend = list(data = unique(series))
@@ -51,7 +72,14 @@ echart.data.frame = function(
     'echarts', params, width = width, height = height, package = 'recharts',
     dependencies = getDependency(NULL)
   )
-  chart %>% eAxis('x', name = xlab) %>% eAxis('y', name = ylab)
+  ###start both axes from 0.
+  ###but why would you ever want to start a scatter plot from 0? so turn it back.
+
+
+  if (type == "scatter") return (chart %>% eAxis('x', name = xlab) %>% eAxis('y', name = ylab))
+  if (type == "bar") return (chart %>% eAxis('x', name = xlab, data = unique(x)) %>% eAxis('y', name = ylab, min = min_yaxis))
+  if (type == "line") return (chart %>% eAxis('x', name = xlab, data = unique(x)) %>% eAxis('y', name = ylab, min = min_yaxis))
+
 }
 
 #' @export
@@ -66,6 +94,8 @@ eChart = echart
 
 determineType = function(x, y) {
   if (is.numeric(x) && is.numeric(y)) return('scatter')
+  if (is.factor(x) && is.numeric(y)) return("bar")
+  if (is.numeric(x) && is.null(y)) return("histogram")
   message('The structure of x:')
   str(x)
   message('The structure of y:')

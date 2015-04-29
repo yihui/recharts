@@ -34,7 +34,14 @@ eAxis = function(
     splitNumber = splitNumber, axisLine = axisLine, axisTick = axisTick,
     axisLabel = axisLabel, splitLine = splitLine, splitArea = splitArea, data = data
   )
-  x[[i]] = mergeList(x[[i]], o)
+  if (length(x[[i]])) {
+    # only merge the arguments that are not missing, e.g. eAxis(min = 0) will
+    # only override 'min' but will not override the 'name' attribute
+    a = intersect(names(as.list(match.call()[-1])), names(o))#;browser()
+    x[[i]] = mergeList(x[[i]], o[a])
+  } else {
+    x[[i]] = mergeList(x[[i]], o)
+  }
   chart$x = x
 
   chart

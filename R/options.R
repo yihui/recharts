@@ -49,7 +49,7 @@ eYAxis = function(chart, ...) {
 }
 
 axisType = function(data, which = c('x', 'y')) {
-  if (is.numeric(data)) return('value')
+  if (is.numeric(data) || is.null(data)) return('value')
   if (is.factor(data) || is.character(data)) return('category')
   if (inherits(data, 'Date')) return('time')
   message('The structure of the ', which, ' variable:')

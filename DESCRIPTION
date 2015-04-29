@@ -4,6 +4,7 @@ Title: An R Interface to ECharts
 Version: 0.0.1
 Date: 2014-12-18
 Authors@R: c(
+    person("Liyun", "Chen", role = "aut"),
     person("Taiyun", "Wei", role = c("aut", "cre"), email = "weitaiyun@gmail.com"),
     person("Yihui", "Xie", role = "aut"),
     person("Yang", "Zhou", role = "aut"),

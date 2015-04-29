@@ -66,7 +66,9 @@ echart.data.frame = function(
   ), meta = list(
     x = x, y = y
   ))
-  if (!is.null(series)) params$legend = list(data = unique(series))
+  if (!is.null(series)) {
+    params$legend = list(data = levels(as.factor(series)))
+  }
 
   chart = htmlwidgets::createWidget(
     'echarts', params, width = width, height = height, package = 'recharts',

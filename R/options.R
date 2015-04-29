@@ -18,7 +18,8 @@ eAxis = function(
   splitArea = list(show = FALSE), data = list()
 ) {
   which = match.arg(which)
-  if (missing(type)) type = axisType(getMeta(chart)[[which]], which)
+  odata = getMeta(chart)[[which]]  # original data along the axis
+  if (missing(type)) type = axisType(odata, which)
   if (missing(position)) position = if (which == 'x') 'bottom' else 'left'
 
   x = chart$x

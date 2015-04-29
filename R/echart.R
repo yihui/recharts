@@ -48,10 +48,10 @@ echart.data.frame = function(
   x = evalFormula(x, data)
   y = evalFormula(y, data)
   if (type == 'auto') type = determineType(x, y)
-
-  #for bar plot, convert x  to factors
-  if (type == 'bar' && !is.factor(x)) x = as.factor(x)
-  if (type == 'bar' && !is.numeric(y)) stop("y must be numeric for bar plot.")
+  if (type == 'bar') {
+    x = as.factor(x)
+    if (is.null(y)) ylab = 'Frequency'
+  }
 
   series = evalFormula(series, data)
   data_fun = getFromNamespace(paste0('data_', type), 'recharts')
@@ -94,7 +94,10 @@ eChart = echart
 
 determineType = function(x, y) {
   if (is.numeric(x) && is.numeric(y)) return('scatter')
-  if (is.factor(x) && is.numeric(y)) return("bar")
+  # when y is numeric, plot y against x; when y is NULL, treat x as a
+  # categorical variable, and plot its frequencies
+  if ((is.factor(x) || is.character(x)) && (is.numeric(y) || is.null(y)))
+    return('bar')
   if (is.numeric(x) && is.null(y)) return("histogram")
   message('The structure of x:')
   str(x)

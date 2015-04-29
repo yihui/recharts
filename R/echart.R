@@ -63,7 +63,7 @@ echart.data.frame = function(
   params = structure(list(
     series = data_fun(x, y, series),
     xAxis = list(), yAxis = list()
-    ), meta = list(
+  ), meta = list(
     x = x, y = y
   ))
   if (!is.null(series)) params$legend = list(data = unique(series))

@@ -1,7 +1,7 @@
 Package: recharts
 Type: Package
 Title: An R Interface to ECharts
-Version: 0.0.1
+Version: 0.0.2
 Date: 2014-12-18
 Authors@R: c(
     person("Liyun", "Chen", role = "aut"),

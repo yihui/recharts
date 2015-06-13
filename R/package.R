@@ -4,4 +4,4 @@
 #' @export JS
 NULL
 
-EChartsVersion = '2.2.1'
+EChartsVersion = '2.2.3'

@@ -1,9 +1,11 @@
 set.seed(0102)
 options(htmlwidgets.TOJSON_ARGS = list(pretty = TRUE))
+Sys.setenv(R_KNITR_OPTIONS = 'knitr.chunk.tidy = FALSE')
+knitr::opts_chunk$set(comment = '# ', collapse = TRUE)
 library(recharts)
 f = rmarkdown::render(commandArgs(TRUE))
 # remove version numbers in HTML
-r = '-\\d+[.]\\d+[.]\\d+$'
+r = '-\\d+([.]\\d+){0,3}$'
 v1 = rev(list.files('libs', r, full.names = TRUE))
 v2 = gsub(r, '', v1)
 x = readLines(f)

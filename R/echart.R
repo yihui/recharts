@@ -61,7 +61,7 @@ echart.data.frame = function(
     xAxis = list(), yAxis = list()
   ), meta = list(
     x = x, y = y
-  ), TOJSON_ARGS = list(pretty = TRUE))
+  ))
 
   if (!is.null(series)) {
     params$legend = list(data = levels(as.factor(series)))

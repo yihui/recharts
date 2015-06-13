@@ -91,6 +91,7 @@ determineType = function(x, y) {
   # categorical variable, and plot its frequencies
   if ((is.factor(x) || is.character(x)) && (is.numeric(y) || is.null(y)))
     return('bar')
+  if (is.null(x) && is.ts(y)) return('line')
   # FIXME: 'histogram' is not a standard plot type of ECharts
   # http://echarts.baidu.com/doc/doc.html
   if (is.numeric(x) && is.null(y)) return('histogram')

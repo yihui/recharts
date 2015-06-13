@@ -50,6 +50,10 @@ data_bar = function(x, y, series = NULL, type = 'bar') {
 }
 
 data_line = function(x, y, series = NULL) {
+  if (is.null(x) && is.ts(y)) {
+    x = as.numeric(time(y))
+    y = as.numeric(y)
+  }
   if (is.numeric(x)) {
     return(data_scatter(x, y, series, type = 'line'))
   }

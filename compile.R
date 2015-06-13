@@ -17,3 +17,10 @@ i = duplicated(v2)
 unlink(c(v1[i], v2), recursive = TRUE)
 file.rename(v1[!i], v2[!i])
 writeLines(x, f)
+
+unlink(file.path('libs/bootstrap/css/', c(
+  'bootstrap-theme.css', 'bootstrap-theme.min.css', 'bootstrap.css',
+  'cerulean.min.css', 'flatly.min.css', 'journal.min.css',
+  'readable.min.css', 'spacelab.min.css', 'united.min.css',
+  '../js/bootstrap.js'
+)))

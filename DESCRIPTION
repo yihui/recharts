@@ -14,12 +14,12 @@ Description: Provides an R interface to the JavaScript library ECharts for
     interactive data visualization.
 Imports:
     htmltools,
-    htmlwidgets (>= 0.3.3),
+    htmlwidgets (>= 0.4),
     magrittr
 Suggests:
     knitr,
     rmarkdown,
-    shiny (> 0.11.1)
+    shiny (>= 0.12.1)
 License: MIT + file LICENSE
 LazyData: TRUE
 VignetteBuilder: knitr

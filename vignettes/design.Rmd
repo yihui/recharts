@@ -1,21 +1,15 @@
 ---
-title: "The Design of the recharts Package"
+title: "An Introduction to the recharts Package"
 author: "Yihui Xie"
 date: "`r Sys.Date()`"
 output: knitr:::html_vignette
 vignette: >
-  %\VignetteIndexEntry{The Design of the recharts Package}
+  %\VignetteIndexEntry{An Introduction to the recharts Package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(tidy = FALSE)
-```
-
-The **htmlwidgets** package has made it much easier to port JavaScript libraries into R, and these libraries can be used in both static R Markdown documents and Shiny apps. This **recharts** package was designed using **htmlwidgets**, which can save us (developers) a lot of time on managing JavaScript dependencies and dealing with different types of output documents such as R Markdown and Shiny.
-
-The main function in this package is the `echart()` function (an S3 generic function), and the goal is to make it smart enough to deal with different types of R data automatically. For example, when a data frame is passed to `echart()`, and the `x`/`y` variables are numeric, it should automatically figure out that you probably need a scatterplot, and the axes will be automatically generated. Of course, you can also override the automatic guess. Here are some quick examples:
+Please see the package website http://yihui.name/recharts for the full documentation. Here are some quick examples:
 
 ```{r}
 library(recharts)
@@ -23,76 +17,3 @@ library(recharts)
 echart(iris, ~Sepal.Length, ~Sepal.Width)
 echart(iris, ~Sepal.Length, ~Sepal.Width, series = ~Species)
 ```
-
-
-Given that ECharts supports so many types of charts, it may take a while for us to make `echart()` really smart. With that in mind, we also provided a really low-level S3 method defined for lists. Since the main usage of ECharts is that you pass a JavaScript object to the method `.setOption()`, and we can construct such an object using a list in R. This low-level `echart.list()` method makes it possible for you to create arbitrary charts. Here is a simple example of a Chord diagram taken from http://echarts.baidu.com/doc/example/chord1.html:
-
-```{r}
-chordEx1 = list(
-  title = list(
-    text = '测试数据',
-    subtext = 'From d3.js',
-    x = 'right',
-    y = 'bottom'
-  ),
-  tooltip = list(
-    trigger = 'item',
-    formatter = JS('function(params) {
-      if (params.indicator2) { // is edge
-        return params.value.weight;
-      } else {// is node
-        return params.name
-      }
-    }')
-  ),
-  toolbox = list(
-    show = TRUE,
-    feature = list(
-      restore = list(show = TRUE),
-      magicType = list(show = TRUE, type = c('force', 'chord')),
-      saveAsImage = list(show = TRUE)
-    )
-  ),
-  legend = list(
-    x = 'left',
-    data = c('group1', 'group2', 'group3', 'group4')
-  ),
-  series = list(
-    list(
-      type = 'chord',
-      sort = 'ascending',
-      sortSub = 'descending',
-      showScale = TRUE,
-      showScaleText = TRUE,
-      data = list(
-        list(name = 'group1'),
-        list(name = 'group2'),
-        list(name = 'group3'),
-        list(name = 'group4')
-      ),
-      itemStyle = list(
-        normal = list(
-          label = list(show = FALSE)
-        )
-      ),
-      matrix = rbind(
-        c(11975,  5871, 8916, 2868),
-        c( 1951, 10048, 2060, 6171),
-        c( 8010, 16145, 8090, 8045),
-        c( 1013,   990,  940, 6907)
-      )
-    )
-  )
-)
-
-echart(chordEx1)
-```
-
-Apparently all we did was to translate the JavaScript object in the [original example](http://echarts.baidu.com/doc/example/chord1.html) into R. Note we translated the function `tooltip.fomatter` using the `JS()` function in **htmlwidgets**. All other objects can be mapped naturally to R.
-
-Hopefully you see the two extremes in the design now:
-
-1. We want `echart()` to be really smart so you do not need to think about the ECharts options (the JavaScript object). You just use the function like other R plotting functions, and we take care of as many gory details as we can under the hood.
-1. Before we get there, you can always fall back to the `echart.list()` method, which probably does not make much sense to most R users, but it works anyway.
-
-This is a project that I (Yihui) started last year in a couple of days, but it is difficult for me to find more time to continue working on it. Perhaps I can come back in a few months, but I wish someone else can follow my thoughts, and fill out the blanks. I only tested scatterplots as a proof-of-concept. I do not think it is terribly difficult to support other types of charts. You just need patience to read the documentation of ECharts, and careful thinking on what the _natural_ syntax is for R users to create charts, assuming the users do not understand JavaScript or ECharts at all.

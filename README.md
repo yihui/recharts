@@ -19,10 +19,5 @@ echart(iris, ~Sepal.Length, ~Sepal.Width)
 echart(iris, ~Sepal.Length, ~Sepal.Width, series = ~Species)
 ```
 
-See the package vignette for more information if you want to contribute:
-
-```r
-vignette('design', package = 'recharts')
-```
-
 See https://github.com/taiyun/recharts for a similar project that we worked on before. Without the blessings of **htmlwidgets**, it is much more difficult to maintain that project. I hope this one can grow into a truly nice and exciting package.
+See the package website <http://yihui.name/recharts> for more information if you want to contribute.

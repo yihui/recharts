@@ -1,0 +1,96 @@
+---
+title: "recharts: An R Interface to ECharts"
+---
+
+---
+
+<div class="alert alert-warning">
+
+<strong>Note:</strong> This package is still under active development. The API may change from day to day without notice. Please use it with caution. The documentation here always reflects the latest development version of **recharts** on [Github](https://github.com/yihui/recharts). To install the package:
+
+```r
+install.packages(
+  'recharts',
+  repos = c('http://yihui.name/xran', 'http://cran.rstudio.com')
+)
+```
+
+</div>
+
+The R package **recharts** provides an interface to the JavaScript library [ECharts](http://echarts.baidu.com) for data visualization. The goal of this package is to make it easy to create charts with only a few lines of R code. R users should be able to get started with ECharts without having to know HTML or JavaScript, although advanced users will benefit from their knowledge of JavaScript. Here is an example of a scatterplot that shows the basic syntax of this package:
+
+```{r}
+library(recharts)
+echart(iris, ~Sepal.Length, ~Sepal.Width, series = ~Species)
+```
+
+The **recharts** package was built on top of [**htmlwidgets**](http://htmlwidgets.org), which can save us a lot of time on managing JavaScript dependencies and dealing with different types of output documents such as R Markdown and Shiny. You just create a chart, and we will take care of the rest of things when the chart is renderd in R Markdown, Shiny, or the R console / RStudio.
+
+The main function in this package is the `echart()` function (an S3 generic function), and we want to make it smart enough to deal with different types of R data automatically. For example, when a data frame is passed to `echart()`, and the `x`/`y` variables are numeric, it should automatically figure out that you probably need a scatterplot, and the axes will be automatically generated. Of course, you can also override the automatic guess.
+
+Given that ECharts supports so many types of charts, it may take a while for us to make `echart()` really smart. With that in mind, we also provided a really low-level S3 method defined for lists. Since the main usage of ECharts is that you pass a JavaScript object to the method `.setOption()`, and we can construct such an object using a list in R. This low-level `echart.list()` method makes it possible for you to create arbitrary charts. Here is a simple example of a Chord diagram taken from http://echarts.baidu.com/doc/example/chord1.html:
+
+```{r}
+chordEx1 = list(
+  title = list(
+    text = '测试数据',
+    subtext = 'From d3.js',
+    x = 'right',
+    y = 'bottom'
+  ),
+  tooltip = list(
+    trigger = 'item',
+    formatter = JS('function(params) {
+      if (params.indicator2) { // is edge
+        return params.value.weight;
+      } else {// is node
+        return params.name
+      }
+    }')
+  ),
+  toolbox = list(
+    show = TRUE,
+    feature = list(
+      restore = list(show = TRUE),
+      magicType = list(show = TRUE, type = c('force', 'chord')),
+      saveAsImage = list(show = TRUE)
+    )
+  ),
+  legend = list(
+    x = 'left',
+    data = c('group1', 'group2', 'group3', 'group4')
+  ),
+  series = list(
+    list(
+      type = 'chord',
+      sort = 'ascending',
+      sortSub = 'descending',
+      showScale = TRUE,
+      showScaleText = TRUE,
+      data = list(
+        list(name = 'group1'),
+        list(name = 'group2'),
+        list(name = 'group3'),
+        list(name = 'group4')
+      ),
+      itemStyle = list(
+        normal = list(
+          label = list(show = FALSE)
+        )
+      ),
+      matrix = rbind(
+        c(11975,  5871, 8916, 2868),
+        c( 1951, 10048, 2060, 6171),
+        c( 8010, 16145, 8090, 8045),
+        c( 1013,   990,  940, 6907)
+      )
+    )
+  )
+)
+
+echart(chordEx1)
+```
+
+Apparently, all we did was to translate the JavaScript object in the [original example](http://echarts.baidu.com/doc/example/chord1.html) into R. Note we translated the function `tooltip.fomatter` using the `JS()` function in **htmlwidgets**. All other objects can be mapped naturally to R.
+
+Normally we do not want R users to specify a long list of options like that. As R users, you are more familiar with (and often work with) data structures like data frames, matrices, tables, and so on. Ideally we hope you can just pass a familiar data object, and we configure ECharts automatically for you whenever possible. We are still _far away_ from our goal at this moment, but we will be happy to know your feedback, and you are welcome to contribute code through [Github pull requests](https://github.com/yihui/recharts).

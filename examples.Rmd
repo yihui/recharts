@@ -1,0 +1,55 @@
+Listed below are the types of charts currently supported in **recharts**. If you are going to try any examples, please make sure you have loaded **recharts** in R:
+
+```{r}
+library(recharts)
+```
+
+# Line chart
+
+We can use a line chart when `x` is numeric (or date/time) and `y` is numeric. Below is an example of a single curve. We specified `type = 'line'`, without which the plot will be a scatterplot.
+
+```{r}
+# an example taken from ?curve
+chippy = function(x) sin(cos(x)*exp(-x/2))
+x = seq(-8, 7, length = 100)
+echart(x = x, y = chippy(x), type = 'line')
+```
+
+An example of multiple lines using the `series` argument (the four groups of data have the same correlation coefficient), and an example of a single time series:
+
+```{r}
+# see ?anscombe for more info about this dataset
+ans = as.matrix(anscombe)
+ans = cbind(x = c(ans[, 1:4]), y = c(ans[, 5:8]), group = rep(1:4, each = 11))
+ans = ans[order(ans[, 1]), ]
+ans = as.data.frame(ans)
+str(ans)
+echart(ans, ~x, ~y, series = ~group, type = 'line')
+echart(y = nhtemp)
+```
+
+# Bar chart
+
+When `x` is character or factor, and `y` is numeric or `NULL`, `echart()` will create a bar chart. An example using the `Titanic` data and showing the survival rates in different classes:
+
+```{r}
+(classSurv = aggregate(Freq ~ Class + Survived, as.data.frame(Titanic), sum))
+echart(classSurv, ~Class, ~Freq, series = ~Survived)
+```
+
+An example showing the frequencies of some random numbers cut by 8 intervals:
+
+```{r}
+x = cut(rnorm(1000), -4:4)
+table(x)
+echart(x = x)
+```
+
+# Scatterplot
+
+When both `x` and `y` are numeric, `echart()` produces a scatterplot by default. Here is a plot of the `faithful` dataset:
+
+```{r}
+echart(faithful, ~eruptions, ~waiting)
+```
+

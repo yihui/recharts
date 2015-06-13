@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>recharts: An R Interface to ECharts</title>
+
+<script src="libs/jquery/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap/css/cosmo.min.css" rel="stylesheet" />
+<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap/shim/respond.min.js"></script>
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="libs/echarts/echarts-all.js"></script>
+<script src="libs/echarts-binding/echarts.js"></script>
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 70px;
+}
+p code {
+  white-space: inherit;
+}
+.html-widget-static-bound {
+  margin: auto;
+}
+.alert>p {
+  margin-bottom: 10.5px;
+}
+</style>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="libs/highlight/default.css"
+      type="text/css" />
+<script src="libs/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+</style>
+<div class="container-fluid main-container">
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="./">recharts</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="./">Home</a></li>
+        <li><a href="examples.html">Examples</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/yihui/recharts" title="View Source on Github"><i class="fa fa-github fa-lg"></i></a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</nav><!--/.navbar -->
+
+<div id="header">
+<h1 class="title">recharts: An R Interface to ECharts</h1>
+</div>
+
+
+<hr />
+<div class="alert alert-warning">
+<p><strong>Note:</strong> This package is still under active development. The API may change from day to day without notice. Please use it with caution. The documentation here always reflects the latest development version of <strong>recharts</strong> on <a href="https://github.com/yihui/recharts">Github</a>. To install the package:</p>
+<pre class="r"><code>install.packages(
+  &#39;recharts&#39;,
+  repos = c(&#39;http://yihui.name/xran&#39;, &#39;http://cran.rstudio.com&#39;)
+)</code></pre>
+</div>
+<p>The R package <strong>recharts</strong> provides an interface to the JavaScript library <a href="http://echarts.baidu.com">ECharts</a> for data visualization. The goal of this package is to make it easy to create charts with only a few lines of R code. R users should be able to get started with ECharts without having to know HTML or JavaScript, although advanced users will benefit from their knowledge of JavaScript. Here is an example of a scatterplot that shows the basic syntax of this package:</p>
+<pre class="r"><code>library(recharts)
+echart(iris, ~Sepal.Length, ~Sepal.Width, series = ~Species)</code></pre>
+<p><div id="htmlwidget-5716" style="width:672px;height:480px;" class="echarts"></div>
+<script type="application/json" data-for="htmlwidget-5716">{
+  "x": {
+    "series": [
+      {
+        "name": "setosa",
+        "type": "scatter",
+        "data": [
+          [5.1, 3.5],
+          [4.9, 3],
+          [4.7, 3.2],
+          [4.6, 3.1],
+          [5, 3.6],
+          [5.4, 3.9],
+          [4.6, 3.4],
+          [5, 3.4],
+          [4.4, 2.9],
+          [4.9, 3.1],
+          [5.4, 3.7],
+          [4.8, 3.4],
+          [4.8, 3],
+          [4.3, 3],
+          [5.8, 4],
+          [5.7, 4.4],
+          [5.4, 3.9],
+          [5.1, 3.5],
+          [5.7, 3.8],
+          [5.1, 3.8],
+          [5.4, 3.4],
+          [5.1, 3.7],
+          [4.6, 3.6],
+          [5.1, 3.3],
+          [4.8, 3.4],
+          [5, 3],
+          [5, 3.4],
+          [5.2, 3.5],
+          [5.2, 3.4],
+          [4.7, 3.2],
+          [4.8, 3.1],
+          [5.4, 3.4],
+          [5.2, 4.1],
+          [5.5, 4.2],
+          [4.9, 3.1],
+          [5, 3.2],
+          [5.5, 3.5],
+          [4.9, 3.6],
+          [4.4, 3],
+          [5.1, 3.4],
+          [5, 3.5],
+          [4.5, 2.3],
+          [4.4, 3.2],
+          [5, 3.5],
+          [5.1, 3.8],
+          [4.8, 3],
+          [5.1, 3.8],
+          [4.6, 3.2],
+          [5.3, 3.7],
+          [5, 3.3]
+        ]
+      },
+      {
+        "name": "versicolor",
+        "type": "scatter",
+        "data": [
+          [7, 3.2],
+          [6.4, 3.2],
+          [6.9, 3.1],
+          [5.5, 2.3],
+          [6.5, 2.8],
+          [5.7, 2.8],
+          [6.3, 3.3],
+          [4.9, 2.4],
+          [6.6, 2.9],
+          [5.2, 2.7],
+          [5, 2],
+          [5.9, 3],
+          [6, 2.2],
+          [6.1, 2.9],
+          [5.6, 2.9],
+          [6.7, 3.1],
+          [5.6, 3],
+          [5.8, 2.7],
+          [6.2, 2.2],
+          [5.6, 2.5],
+          [5.9, 3.2],
+          [6.1, 2.8],
+          [6.3, 2.5],
+          [6.1, 2.8],
+          [6.4, 2.9],
+          [6.6, 3],
+          [6.8, 2.8],
+          [6.7, 3],
+          [6, 2.9],
+          [5.7, 2.6],
+          [5.5, 2.4],
+          [5.5, 2.4],
+          [5.8, 2.7],
+          [6, 2.7],
+          [5.4, 3],
+          [6, 3.4],
+          [6.7, 3.1],
+          [6.3, 2.3],
+          [5.6, 3],
+          [5.5, 2.5],
+          [5.5, 2.6],
+          [6.1, 3],
+          [5.8, 2.6],
+          [5, 2.3],
+          [5.6, 2.7],
+          [5.7, 3],
+          [5.7, 2.9],
+          [6.2, 2.9],
+          [5.1, 2.5],
+          [5.7, 2.8]
+        ]
+      },
+      {
+        "name": "virginica",
+        "type": "scatter",
+        "data": [
+          [6.3, 3.3],
+          [5.8, 2.7],
+          [7.1, 3],
+          [6.3, 2.9],
+          [6.5, 3],
+          [7.6, 3],
+          [4.9, 2.5],
+          [7.3, 2.9],
+          [6.7, 2.5],
+          [7.2, 3.6],
+          [6.5, 3.2],
+          [6.4, 2.7],
+          [6.8, 3],
+          [5.7, 2.5],
+          [5.8, 2.8],
+          [6.4, 3.2],
+          [6.5, 3],
+          [7.7, 3.8],
+          [7.7, 2.6],
+          [6, 2.2],
+          [6.9, 3.2],
+          [5.6, 2.8],
+          [7.7, 2.8],
+          [6.3, 2.7],
+          [6.7, 3.3],
+          [7.2, 3.2],
+          [6.2, 2.8],
+          [6.1, 3],
+          [6.4, 2.8],
+          [7.2, 3],
+          [7.4, 2.8],
+          [7.9, 3.8],
+          [6.4, 2.8],
+          [6.3, 2.8],
+          [6.1, 2.6],
+          [7.7, 3],
+          [6.3, 3.4],
+          [6.4, 3.1],
+          [6, 3],
+          [6.9, 3.1],
+          [6.7, 3.1],
+          [6.9, 3.1],
+          [5.8, 2.7],
+          [6.8, 3.2],
+          [6.7, 3.3],
+          [6.7, 3],
+          [6.3, 2.5],
+          [6.5, 3],
+          [6.2, 3.4],
+          [5.9, 3]
+        ]
+      }
+    ],
+    "xAxis": {
+      "type": "value",
+      "show": true,
+      "position": "bottom",
+      "name": "Sepal.Length",
+      "nameLocation": "end",
+      "nameTextStyle": {},
+      "boundaryGap": [0, 0],
+      "scale": true,
+      "axisLine": {
+        "show": true,
+        "onZero": false
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLabel": {
+        "show": true
+      },
+      "splitLine": {
+        "show": true
+      },
+      "splitArea": {
+        "show": false
+      },
+      "data": []
+    },
+    "yAxis": {
+      "type": "value",
+      "show": true,
+      "position": "left",
+      "name": "Sepal.Width",
+      "nameLocation": "end",
+      "nameTextStyle": {},
+      "boundaryGap": [0, 0],
+      "scale": true,
+      "axisLine": {
+        "show": true,
+        "onZero": false
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLabel": {
+        "show": true
+      },
+      "splitLine": {
+        "show": true
+      },
+      "splitArea": {
+        "show": false
+      },
+      "data": []
+    },
+    "legend": {
+      "data": ["setosa", "versicolor", "virginica"]
+    }
+  },
+  "evals": []
+}</script></p>
+<p>The <strong>recharts</strong> package was built on top of <a href="http://htmlwidgets.org"><strong>htmlwidgets</strong></a>, which can save us a lot of time on managing JavaScript dependencies and dealing with different types of output documents such as R Markdown and Shiny. You just create a chart, and we will take care of the rest of things when the chart is renderd in R Markdown, Shiny, or the R console / RStudio.</p>
+<p>The main function in this package is the <code>echart()</code> function (an S3 generic function), and we want to make it smart enough to deal with different types of R data automatically. For example, when a data frame is passed to <code>echart()</code>, and the <code>x</code>/<code>y</code> variables are numeric, it should automatically figure out that you probably need a scatterplot, and the axes will be automatically generated. Of course, you can also override the automatic guess.</p>
+<p>Given that ECharts supports so many types of charts, it may take a while for us to make <code>echart()</code> really smart. With that in mind, we also provided a really low-level S3 method defined for lists. Since the main usage of ECharts is that you pass a JavaScript object to the method <code>.setOption()</code>, and we can construct such an object using a list in R. This low-level <code>echart.list()</code> method makes it possible for you to create arbitrary charts. Here is a simple example of a Chord diagram taken from <a href="http://echarts.baidu.com/doc/example/chord1.html" class="uri">http://echarts.baidu.com/doc/example/chord1.html</a>:</p>
+<pre class="r"><code>chordEx1 = list(
+  title = list(
+    text = &#39;测试数据&#39;,
+    subtext = &#39;From d3.js&#39;,
+    x = &#39;right&#39;,
+    y = &#39;bottom&#39;
+  ),
+  tooltip = list(
+    trigger = &#39;item&#39;,
+    formatter = JS(&#39;function(params) {
+      if (params.indicator2) { // is edge
+        return params.value.weight;
+      } else {// is node
+        return params.name
+      }
+    }&#39;)
+  ),
+  toolbox = list(
+    show = TRUE,
+    feature = list(
+      restore = list(show = TRUE),
+      magicType = list(show = TRUE, type = c(&#39;force&#39;, &#39;chord&#39;)),
+      saveAsImage = list(show = TRUE)
+    )
+  ),
+  legend = list(
+    x = &#39;left&#39;,
+    data = c(&#39;group1&#39;, &#39;group2&#39;, &#39;group3&#39;, &#39;group4&#39;)
+  ),
+  series = list(
+    list(
+      type = &#39;chord&#39;,
+      sort = &#39;ascending&#39;,
+      sortSub = &#39;descending&#39;,
+      showScale = TRUE,
+      showScaleText = TRUE,
+      data = list(
+        list(name = &#39;group1&#39;),
+        list(name = &#39;group2&#39;),
+        list(name = &#39;group3&#39;),
+        list(name = &#39;group4&#39;)
+      ),
+      itemStyle = list(
+        normal = list(
+          label = list(show = FALSE)
+        )
+      ),
+      matrix = rbind(
+        c(11975,  5871, 8916, 2868),
+        c( 1951, 10048, 2060, 6171),
+        c( 8010, 16145, 8090, 8045),
+        c( 1013,   990,  940, 6907)
+      )
+    )
+  )
+)
+
+echart(chordEx1)</code></pre>
+<p><div id="htmlwidget-4929" style="width:672px;height:480px;" class="echarts"></div>
+<script type="application/json" data-for="htmlwidget-4929">{
+  "x": {
+    "title": {
+      "text": "测试数据",
+      "subtext": "From d3.js",
+      "x": "right",
+      "y": "bottom"
+    },
+    "tooltip": {
+      "trigger": "item",
+      "formatter": "function(params) {\n      if (params.indicator2) { // is edge\n        return params.value.weight;\n      } else {// is node\n        return params.name\n      }\n    }"
+    },
+    "toolbox": {
+      "show": true,
+      "feature": {
+        "restore": {
+          "show": true
+        },
+        "magicType": {
+          "show": true,
+          "type": ["force", "chord"]
+        },
+        "saveAsImage": {
+          "show": true
+        }
+      }
+    },
+    "legend": {
+      "x": "left",
+      "data": ["group1", "group2", "group3", "group4"]
+    },
+    "series": [
+      {
+        "type": "chord",
+        "sort": "ascending",
+        "sortSub": "descending",
+        "showScale": true,
+        "showScaleText": true,
+        "data": [
+          {
+            "name": "group1"
+          },
+          {
+            "name": "group2"
+          },
+          {
+            "name": "group3"
+          },
+          {
+            "name": "group4"
+          }
+        ],
+        "itemStyle": {
+          "normal": {
+            "label": {
+              "show": false
+            }
+          }
+        },
+        "matrix": [
+          [11975, 5871, 8916, 2868],
+          [1951, 10048, 2060, 6171],
+          [8010, 16145, 8090, 8045],
+          [1013, 990, 940, 6907]
+        ]
+      }
+    ]
+  },
+  "evals": ["tooltip.formatter"]
+}</script></p>
+<p>Apparently, all we did was to translate the JavaScript object in the <a href="http://echarts.baidu.com/doc/example/chord1.html">original example</a> into R. Note we translated the function <code>tooltip.fomatter</code> using the <code>JS()</code> function in <strong>htmlwidgets</strong>. All other objects can be mapped naturally to R.</p>
+<p>Normally we do not want R users to specify a long list of options like that. As R users, you are more familiar with (and often work with) data structures like data frames, matrices, tables, and so on. Ideally we hope you can just pass a familiar data object, and we configure ECharts automatically for you whenever possible. We are still <em>far away</em> from our goal at this moment, but we will be happy to know your feedback, and you are welcome to contribute code through <a href="https://github.com/yihui/recharts">Github pull requests</a>.</p>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+    // active menu
+    var href = window.location.pathname;
+    href = href.substr(href.lastIndexOf('/') + 1);
+    if (href === '') href = './';
+    $('a[href="' + href + '"]').parent().addClass('active');
+});
+</script>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+
+</body>
+</html>

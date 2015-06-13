@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title></title>
+
+<script src="libs/jquery/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap/css/cosmo.min.css" rel="stylesheet" />
+<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap/shim/respond.min.js"></script>
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="libs/echarts/echarts-all.js"></script>
+<script src="libs/echarts-binding/echarts.js"></script>
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 70px;
+}
+p code {
+  white-space: inherit;
+}
+.html-widget-static-bound {
+  margin: auto;
+}
+.alert>p {
+  margin-bottom: 10.5px;
+}
+</style>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="libs/highlight/default.css"
+      type="text/css" />
+<script src="libs/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+</style>
+<div class="container-fluid main-container">
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="./">recharts</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="./">Home</a></li>
+        <li><a href="examples.html">Examples</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/yihui/recharts" title="View Source on Github"><i class="fa fa-github fa-lg"></i></a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</nav><!--/.navbar -->
+
+
+
+<p>Listed below are the types of charts currently supported in <strong>recharts</strong>. If you are going to try any examples, please make sure you have loaded <strong>recharts</strong> in R:</p>
+<pre class="r"><code>library(recharts)</code></pre>
+<div id="line-chart" class="section level1">
+<h1><span class="header-section-number">1</span> Line chart</h1>
+<p>We can use a line chart when <code>x</code> is numeric (or date/time) and <code>y</code> is numeric. Below is an example of a single curve. We specified <code>type = 'line'</code>, without which the plot will be a scatterplot.</p>
+<pre class="r"><code># an example taken from ?curve
+chippy = function(x) sin(cos(x)*exp(-x/2))
+x = seq(-8, 7, length = 100)
+echart(x = x, y = chippy(x), type = &#39;line&#39;)</code></pre>
+<p><div id="htmlwidget-5716" style="width:672px;height:480px;" class="echarts"></div>
+<script type="application/json" data-for="htmlwidget-5716">{
+  "x": {
+    "series": [
+      {
+        "type": "line",
+        "data": [
+          [-8, -0.99594814415748],
+          [-7.84848484848485, 0.274641506205349],
+          [-7.6969696969697, 0.869348318511443],
+          [-7.54545454545454, 0.598961357632073],
+          [-7.39393939393939, -0.810998473089057],
+          [-7.24242424242424, 0.503836836528046],
+          [-7.09090909090909, -0.92491100647577],
+          [-6.93939393939394, 0.316314361091175],
+          [-6.78787878787879, 0.805807726681109],
+          [-6.63636363636364, 0.698440524394431],
+          [-6.48484848484848, -0.0557175019171205],
+          [-6.33333333333333, -0.990700597994984],
+          [-6.18181818181818, 0.106794728653955],
+          [-6.03030303030303, 0.779619220798153],
+          [-5.87878787878788, -0.994924808249054],
+          [-5.72727272727273, 0.73235465310926],
+          [-5.57575757575758, -0.216696148135672],
+          [-5.42424242424242, -0.402061215448072],
+          [-5.27272727272727, 0.907552215130304],
+          [-5.12121212121212, -0.90766886646683],
+          [-4.96969696969697, 0.0879195093837338],
+          [-4.81818181818182, 0.922546760456742],
+          [-4.66666666666667, -0.454077064713808],
+          [-4.51515151515152, -0.954574013793544],
+          [-4.36363636363636, -0.112839493561012],
+          [-4.21212121212121, 0.716804063367678],
+          [-4.06060606060606, 0.995748184198731],
+          [-3.90909090909091, 0.932742593919943],
+          [-3.75757575757576, 0.807944869971207],
+          [-3.60606060606061, 0.756550796740845],
+          [-3.45454545454545, 0.80229025207891],
+          [-3.3030303030303, 0.907005557691921],
+          [-3.15151515151515, 0.992594498861537],
+          [-3, 0.962275584627042],
+          [-2.84848484848485, 0.741914013007203],
+          [-2.6969696969697, 0.32925479132812],
+          [-2.54545454545454, -0.185817840773262],
+          [-2.39393939393939, -0.65513568150667],
+          [-2.24242424242424, -0.943201858273206],
+          [-2.09090909090909, -0.987693387619962],
+          [-1.93939393939394, -0.813522194909889],
+          [-1.78787878787879, -0.50255542019804],
+          [-1.63636363636364, -0.14794856475821],
+          [-1.48484848484848, 0.179379937296842],
+          [-1.33333333333333, 0.442316762665176],
+          [-1.18181818181818, 0.632496726009978],
+          [-1.03030303030303, 0.758700711465379],
+          [-0.878787878787879, 0.836113077892478],
+          [-0.727272727272727, 0.879392047118669],
+          [-0.575757575757575, 0.899486740124279],
+          [-0.424242424242424, 0.902999706662435],
+          [-0.272727272727272, 0.892896951817068],
+          [-0.121212121212121, 0.869744644834606],
+          [0.0303030303030312, 0.833001360509651],
+          [0.181818181818182, 0.782113078521223],
+          [0.333333333333334, 0.717278602828524],
+          [0.484848484848484, 0.639832562950952],
+          [0.636363636363637, 0.552263524244952],
+          [0.787878787878789, 0.457947351472633],
+          [0.939393939393939, 0.360716959732224],
+          [1.09090909090909, 0.26439756846504],
+          [1.24242424242424, 0.172412453565316],
+          [1.39393939393939, 0.0875204667620718],
+          [1.54545454545454, 0.0117000994775694],
+          [1.6969696969697, -0.0538409169080967],
+          [1.84848484848485, -0.108570472905049],
+          [2, -0.152494560671964],
+          [2.15151515151515, -0.186012950396752],
+          [2.3030303030303, -0.209791332305911],
+          [2.45454545454546, -0.224660903853678],
+          [2.60606060606061, -0.231546840483042],
+          [2.75757575757576, -0.231421200848595],
+          [2.90909090909091, -0.225273284889139],
+          [3.06060606060606, -0.214090409181366],
+          [3.21212121212121, -0.198843484974185],
+          [3.36363636363636, -0.18047380360314],
+          [3.51515151515152, -0.159879409782443],
+          [3.66666666666667, -0.137900987731623],
+          [3.81818181818182, -0.115308136124868],
+          [3.96969696969697, -0.0927872769888969],
+          [4.12121212121212, -0.0709323541380979],
+          [4.27272727272727, -0.0502391023515242],
+          [4.42424242424242, -0.031103182576767],
+          [4.57575757575758, -0.0138220189427014],
+          [4.72727272727273, 0.00140017354976328],
+          [4.87878787878788, 0.0144448819006135],
+          [5.03030303030303, 0.0252700799659493],
+          [5.18181818181818, 0.0339000290667874],
+          [5.33333333333333, 0.0404147044328624],
+          [5.48484848484848, 0.0449393173142759],
+          [5.63636363636364, 0.0476342658897912],
+          [5.78787878787879, 0.0486857331641965],
+          [5.93939393939394, 0.048297064102126],
+          [6.09090909090909, 0.0466809963042362],
+          [6.24242424242424, 0.0440527827867776],
+          [6.39393939393939, 0.0406242243250848],
+          [6.54545454545455, 0.036598615321892],
+          [6.6969696969697, 0.0321665960179286],
+          [6.84848484848485, 0.0275028920564496],
+          [7, 0.0227639089527035]
+        ]
+      }
+    ],
+    "xAxis": {
+      "type": "value",
+      "show": true,
+      "position": "bottom",
+      "name": "x",
+      "nameLocation": "end",
+      "nameTextStyle": {},
+      "boundaryGap": [0, 0],
+      "scale": true,
+      "axisLine": {
+        "show": true,
+        "onZero": false
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLabel": {
+        "show": true
+      },
+      "splitLine": {
+        "show": true
+      },
+      "splitArea": {
+        "show": false
+      },
+      "data": []
+    },
+    "yAxis": {
+      "type": "value",
+      "show": true,
+      "position": "left",
+      "name": "chippy(x)",
+      "nameLocation": "end",
+      "nameTextStyle": {},
+      "boundaryGap": [0, 0],
+      "scale": true,
+      "axisLine": {
+        "show": true,
+        "onZero": false
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLabel": {
+        "show": true
+      },
+      "splitLine": {
+        "show": true
+      },
+      "splitArea": {
+        "show": false
+      },
+      "data": []
+    }
+  },
+  "evals": []
+}</script></p>
+<p>An example of multiple lines using the <code>series</code> argument (the four groups of data have the same correlation coefficient), and an example of a single time series:</p>
+<pre class="r"><code># see ?anscombe for more info about this dataset
+ans = as.matrix(anscombe)
+ans = cbind(x = c(ans[, 1:4]), y = c(ans[, 5:8]), group = rep(1:4, each = 11))
+ans = ans[order(ans[, 1]), ]
+ans = as.data.frame(ans)
+str(ans)
+#  &#39;data.frame&#39;:    44 obs. of  3 variables:
+#   $ x    : num  4 4 4 5 5 5 6 6 6 7 ...
+#   $ y    : num  4.26 3.1 5.39 5.68 4.74 5.73 7.24 6.13 6.08 4.82 ...
+#   $ group: num  1 2 3 1 2 3 1 2 3 1 ...
+echart(ans, ~x, ~y, series = ~group, type = &#39;line&#39;)</code></pre>
+<p><div id="htmlwidget-4929" style="width:672px;height:480px;" class="echarts"></div>
+<script type="application/json" data-for="htmlwidget-4929">{
+  "x": {
+    "series": [
+      {
+        "name": "1",
+        "type": "line",
+        "data": [
+          [4, 4.26],
+          [5, 5.68],
+          [6, 7.24],
+          [7, 4.82],
+          [8, 6.95],
+          [9, 8.81],
+          [10, 8.04],
+          [11, 8.33],
+          [12, 10.84],
+          [13, 7.58],
+          [14, 9.96]
+        ]
+      },
+      {
+        "name": "2",
+        "type": "line",
+        "data": [
+          [4, 3.1],
+          [5, 4.74],
+          [6, 6.13],
+          [7, 7.26],
+          [8, 8.14],
+          [9, 8.77],
+          [10, 9.14],
+          [11, 9.26],
+          [12, 9.13],
+          [13, 8.74],
+          [14, 8.1]
+        ]
+      },
+      {
+        "name": "3",
+        "type": "line",
+        "data": [
+          [4, 5.39],
+          [5, 5.73],
+          [6, 6.08],
+          [7, 6.42],
+          [8, 6.77],
+          [9, 7.11],
+          [10, 7.46],
+          [11, 7.81],
+          [12, 8.15],
+          [13, 12.74],
+          [14, 8.84]
+        ]
+      },
+      {
+        "name": "4",
+        "type": "line",
+        "data": [
+          [8, 6.58],
+          [8, 5.76],
+          [8, 7.71],
+          [8, 8.84],
+          [8, 8.47],
+          [8, 7.04],
+          [8, 5.25],
+          [8, 5.56],
+          [8, 7.91],
+          [8, 6.89],
+          [19, 12.5]
+        ]
+      }
+    ],
+    "xAxis": {
+      "type": "value",
+      "show": true,
+      "position": "bottom",
+      "name": "x",
+      "nameLocation": "end",
+      "nameTextStyle": {},
+      "boundaryGap": [0, 0],
+      "scale": true,
+      "axisLine": {
+        "show": true,
+        "onZero": false
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLabel": {
+        "show": true
+      },
+      "splitLine": {
+        "show": true
+      },
+      "splitArea": {
+        "show": false
+      },
+      "data": []
+    },
+    "yAxis": {
+      "type": "value",
+      "show": true,
+      "position": "left",
+      "name": "y",
+      "nameLocation": "end",
+      "nameTextStyle": {},
+      "boundaryGap": [0, 0],
+      "scale": true,
+      "axisLine": {
+        "show": true,
+        "onZero": false
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLabel": {
+        "show": true
+      },
+      "splitLine": {
+        "show": true
+      },
+      "splitArea": {
+        "show": false
+      },
+      "data": []
+    },
+    "legend": {
+      "data": ["1", "2", "3", "4"]
+    }
+  },
+  "evals": []
+}</script></p>
+<pre class="r"><code>echart(y = nhtemp)</code></pre>
+<p><div id="htmlwidget-7837" style="width:672px;height:480px;" class="echarts"></div>
+<script type="application/json" data-for="htmlwidget-7837">{
+  "x": {
+    "series": [
+      {
+        "type": "line",
+        "data": [
+          [1912, 49.9],
+          [1913, 52.3],
+          [1914, 49.4],
+          [1915, 51.1],
+          [1916, 49.4],
+          [1917, 47.9],
+          [1918, 49.8],
+          [1919, 50.9],
+          [1920, 49.3],
+          [1921, 51.9],
+          [1922, 50.8],
+          [1923, 49.6],
+          [1924, 49.3],
+          [1925, 50.6],
+          [1926, 48.4],
+          [1927, 50.7],
+          [1928, 50.9],
+          [1929, 50.6],
+          [1930, 51.5],
+          [1931, 52.8],
+          [1932, 51.8],
+          [1933, 51.1],
+          [1934, 49.8],
+          [1935, 50.2],
+          [1936, 50.4],
+          [1937, 51.6],
+          [1938, 51.8],
+          [1939, 50.9],
+          [1940, 48.8],
+          [1941, 51.7],
+          [1942, 51],
+          [1943, 50.6],
+          [1944, 51.7],
+          [1945, 51.5],
+          [1946, 52.1],
+          [1947, 51.3],
+          [1948, 51],
+          [1949, 54],
+          [1950, 51.4],
+          [1951, 52.7],
+          [1952, 53.1],
+          [1953, 54.6],
+          [1954, 52],
+          [1955, 52],
+          [1956, 50.9],
+          [1957, 52.6],
+          [1958, 50.2],
+          [1959, 52.6],
+          [1960, 51.6],
+          [1961, 51.9],
+          [1962, 50.5],
+          [1963, 50.9],
+          [1964, 51.7],
+          [1965, 51.4],
+          [1966, 51.7],
+          [1967, 50.8],
+          [1968, 51.9],
+          [1969, 51.8],
+          [1970, 51.9],
+          [1971, 53]
+        ]
+      }
+    ],
+    "xAxis": {
+      "type": "value",
+      "show": true,
+      "position": "bottom",
+      "name": "",
+      "nameLocation": "end",
+      "nameTextStyle": {},
+      "boundaryGap": [0, 0],
+      "scale": true,
+      "axisLine": {
+        "show": true,
+        "onZero": false
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLabel": {
+        "show": true
+      },
+      "splitLine": {
+        "show": true
+      },
+      "splitArea": {
+        "show": false
+      },
+      "data": []
+    },
+    "yAxis": {
+      "type": "value",
+      "show": true,
+      "position": "left",
+      "name": "nhtemp",
+      "nameLocation": "end",
+      "nameTextStyle": {},
+      "boundaryGap": [0, 0],
+      "scale": true,
+      "axisLine": {
+        "show": true,
+        "onZero": false
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLabel": {
+        "show": true
+      },
+      "splitLine": {
+        "show": true
+      },
+      "splitArea": {
+        "show": false
+      },
+      "data": []
+    }
+  },
+  "evals": []
+}</script></p>
+</div>
+<div id="bar-chart" class="section level1">
+<h1><span class="header-section-number">2</span> Bar chart</h1>
+<p>When <code>x</code> is character or factor, and <code>y</code> is numeric or <code>NULL</code>, <code>echart()</code> will create a bar chart. An example using the <code>Titanic</code> data and showing the survival rates in different classes:</p>
+<pre class="r"><code>(classSurv = aggregate(Freq ~ Class + Survived, as.data.frame(Titanic), sum))
+#    Class Survived Freq
+#  1   1st       No  122
+#  2   2nd       No  167
+#  3   3rd       No  528
+#  4  Crew       No  673
+#  5   1st      Yes  203
+#  6   2nd      Yes  118
+#  7   3rd      Yes  178
+#  8  Crew      Yes  212
+echart(classSurv, ~Class, ~Freq, series = ~Survived)</code></pre>
+<p><div id="htmlwidget-5403" style="width:672px;height:480px;" class="echarts"></div>
+<script type="application/json" data-for="htmlwidget-5403">{
+  "x": {
+    "series": [
+      {
+        "name": "No",
+        "type": "bar",
+        "data": [122, 167, 528, 673]
+      },
+      {
+        "name": "Yes",
+        "type": "bar",
+        "data": [203, 118, 178, 212]
+      }
+    ],
+    "xAxis": {
+      "type": "category",
+      "show": true,
+      "position": "bottom",
+      "name": "Class",
+      "nameLocation": "end",
+      "nameTextStyle": {},
+      "boundaryGap": [0, 0],
+      "scale": true,
+      "axisLine": {
+        "show": true,
+        "onZero": false
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLabel": {
+        "show": true
+      },
+      "splitLine": {
+        "show": true
+      },
+      "splitArea": {
+        "show": false
+      },
+      "data": ["1st", "2nd", "3rd", "Crew"]
+    },
+    "yAxis": {
+      "type": "value",
+      "show": true,
+      "position": "left",
+      "name": "Freq",
+      "nameLocation": "end",
+      "nameTextStyle": {},
+      "boundaryGap": [0, 0],
+      "scale": true,
+      "axisLine": {
+        "show": true,
+        "onZero": false
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLabel": {
+        "show": true
+      },
+      "splitLine": {
+        "show": true
+      },
+      "splitArea": {
+        "show": false
+      },
+      "data": []
+    },
+    "legend": {
+      "data": ["No", "Yes"]
+    }
+  },
+  "evals": []
+}</script></p>
+<p>An example showing the frequencies of some random numbers cut by 8 intervals:</p>
+<pre class="r"><code>x = cut(rnorm(1000), -4:4)
+table(x)
+#  x
+#  (-4,-3] (-3,-2] (-2,-1]  (-1,0]   (0,1]   (1,2]   (2,3]   (3,4] 
+#        1      13     123     377     332     127      26       1
+echart(x = x)</code></pre>
+<p><div id="htmlwidget-9702" style="width:672px;height:480px;" class="echarts"></div>
+<script type="application/json" data-for="htmlwidget-9702">{
+  "x": {
+    "series": [
+      {
+        "type": "bar",
+        "data": [1, 13, 123, 377, 332, 127, 26, 1]
+      }
+    ],
+    "xAxis": {
+      "type": "category",
+      "show": true,
+      "position": "bottom",
+      "name": "x",
+      "nameLocation": "end",
+      "nameTextStyle": {},
+      "boundaryGap": [0, 0],
+      "scale": true,
+      "axisLine": {
+        "show": true,
+        "onZero": false
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLabel": {
+        "show": true
+      },
+      "splitLine": {
+        "show": true
+      },
+      "splitArea": {
+        "show": false
+      },
+      "data": ["(-4,-3]", "(-3,-2]", "(-2,-1]", "(-1,0]", "(0,1]", "(1,2]", "(2,3]", "(3,4]"]
+    },
+    "yAxis": {
+      "type": "value",
+      "show": true,
+      "position": "left",
+      "name": "Frequency",
+      "nameLocation": "end",
+      "nameTextStyle": {},
+      "boundaryGap": [0, 0],
+      "scale": true,
+      "axisLine": {
+        "show": true,
+        "onZero": false
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLabel": {
+        "show": true
+      },
+      "splitLine": {
+        "show": true
+      },
+      "splitArea": {
+        "show": false
+      },
+      "data": []
+    }
+  },
+  "evals": []
+}</script></p>
+</div>
+<div id="scatterplot" class="section level1">
+<h1><span class="header-section-number">3</span> Scatterplot</h1>
+<p>When both <code>x</code> and <code>y</code> are numeric, <code>echart()</code> produces a scatterplot by default. Here is a plot of the <code>faithful</code> dataset:</p>
+<pre class="r"><code>echart(faithful, ~eruptions, ~waiting)</code></pre>
+<p><div id="htmlwidget-139" style="width:672px;height:480px;" class="echarts"></div>
+<script type="application/json" data-for="htmlwidget-139">{
+  "x": {
+    "series": [
+      {
+        "type": "scatter",
+        "data": [
+          [3.6, 79],
+          [1.8, 54],
+          [3.333, 74],
+          [2.283, 62],
+          [4.533, 85],
+          [2.883, 55],
+          [4.7, 88],
+          [3.6, 85],
+          [1.95, 51],
+          [4.35, 85],
+          [1.833, 54],
+          [3.917, 84],
+          [4.2, 78],
+          [1.75, 47],
+          [4.7, 83],
+          [2.167, 52],
+          [1.75, 62],
+          [4.8, 84],
+          [1.6, 52],
+          [4.25, 79],
+          [1.8, 51],
+          [1.75, 47],
+          [3.45, 78],
+          [3.067, 69],
+          [4.533, 74],
+          [3.6, 83],
+          [1.967, 55],
+          [4.083, 76],
+          [3.85, 78],
+          [4.433, 79],
+          [4.3, 73],
+          [4.467, 77],
+          [3.367, 66],
+          [4.033, 80],
+          [3.833, 74],
+          [2.017, 52],
+          [1.867, 48],
+          [4.833, 80],
+          [1.833, 59],
+          [4.783, 90],
+          [4.35, 80],
+          [1.883, 58],
+          [4.567, 84],
+          [1.75, 58],
+          [4.533, 73],
+          [3.317, 83],
+          [3.833, 64],
+          [2.1, 53],
+          [4.633, 82],
+          [2, 59],
+          [4.8, 75],
+          [4.716, 90],
+          [1.833, 54],
+          [4.833, 80],
+          [1.733, 54],
+          [4.883, 83],
+          [3.717, 71],
+          [1.667, 64],
+          [4.567, 77],
+          [4.317, 81],
+          [2.233, 59],
+          [4.5, 84],
+          [1.75, 48],
+          [4.8, 82],
+          [1.817, 60],
+          [4.4, 92],
+          [4.167, 78],
+          [4.7, 78],
+          [2.067, 65],
+          [4.7, 73],
+          [4.033, 82],
+          [1.967, 56],
+          [4.5, 79],
+          [4, 71],
+          [1.983, 62],
+          [5.067, 76],
+          [2.017, 60],
+          [4.567, 78],
+          [3.883, 76],
+          [3.6, 83],
+          [4.133, 75],
+          [4.333, 82],
+          [4.1, 70],
+          [2.633, 65],
+          [4.067, 73],
+          [4.933, 88],
+          [3.95, 76],
+          [4.517, 80],
+          [2.167, 48],
+          [4, 86],
+          [2.2, 60],
+          [4.333, 90],
+          [1.867, 50],
+          [4.817, 78],
+          [1.833, 63],
+          [4.3, 72],
+          [4.667, 84],
+          [3.75, 75],
+          [1.867, 51],
+          [4.9, 82],
+          [2.483, 62],
+          [4.367, 88],
+          [2.1, 49],
+          [4.5, 83],
+          [4.05, 81],
+          [1.867, 47],
+          [4.7, 84],
+          [1.783, 52],
+          [4.85, 86],
+          [3.683, 81],
+          [4.733, 75],
+          [2.3, 59],
+          [4.9, 89],
+          [4.417, 79],
+          [1.7, 59],
+          [4.633, 81],
+          [2.317, 50],
+          [4.6, 85],
+          [1.817, 59],
+          [4.417, 87],
+          [2.617, 53],
+          [4.067, 69],
+          [4.25, 77],
+          [1.967, 56],
+          [4.6, 88],
+          [3.767, 81],
+          [1.917, 45],
+          [4.5, 82],
+          [2.267, 55],
+          [4.65, 90],
+          [1.867, 45],
+          [4.167, 83],
+          [2.8, 56],
+          [4.333, 89],
+          [1.833, 46],
+          [4.383, 82],
+          [1.883, 51],
+          [4.933, 86],
+          [2.033, 53],
+          [3.733, 79],
+          [4.233, 81],
+          [2.233, 60],
+          [4.533, 82],
+          [4.817, 77],
+          [4.333, 76],
+          [1.983, 59],
+          [4.633, 80],
+          [2.017, 49],
+          [5.1, 96],
+          [1.8, 53],
+          [5.033, 77],
+          [4, 77],
+          [2.4, 65],
+          [4.6, 81],
+          [3.567, 71],
+          [4, 70],
+          [4.5, 81],
+          [4.083, 93],
+          [1.8, 53],
+          [3.967, 89],
+          [2.2, 45],
+          [4.15, 86],
+          [2, 58],
+          [3.833, 78],
+          [3.5, 66],
+          [4.583, 76],
+          [2.367, 63],
+          [5, 88],
+          [1.933, 52],
+          [4.617, 93],
+          [1.917, 49],
+          [2.083, 57],
+          [4.583, 77],
+          [3.333, 68],
+          [4.167, 81],
+          [4.333, 81],
+          [4.5, 73],
+          [2.417, 50],
+          [4, 85],
+          [4.167, 74],
+          [1.883, 55],
+          [4.583, 77],
+          [4.25, 83],
+          [3.767, 83],
+          [2.033, 51],
+          [4.433, 78],
+          [4.083, 84],
+          [1.833, 46],
+          [4.417, 83],
+          [2.183, 55],
+          [4.8, 81],
+          [1.833, 57],
+          [4.8, 76],
+          [4.1, 84],
+          [3.966, 77],
+          [4.233, 81],
+          [3.5, 87],
+          [4.366, 77],
+          [2.25, 51],
+          [4.667, 78],
+          [2.1, 60],
+          [4.35, 82],
+          [4.133, 91],
+          [1.867, 53],
+          [4.6, 78],
+          [1.783, 46],
+          [4.367, 77],
+          [3.85, 84],
+          [1.933, 49],
+          [4.5, 83],
+          [2.383, 71],
+          [4.7, 80],
+          [1.867, 49],
+          [3.833, 75],
+          [3.417, 64],
+          [4.233, 76],
+          [2.4, 53],
+          [4.8, 94],
+          [2, 55],
+          [4.15, 76],
+          [1.867, 50],
+          [4.267, 82],
+          [1.75, 54],
+          [4.483, 75],
+          [4, 78],
+          [4.117, 79],
+          [4.083, 78],
+          [4.267, 78],
+          [3.917, 70],
+          [4.55, 79],
+          [4.083, 70],
+          [2.417, 54],
+          [4.183, 86],
+          [2.217, 50],
+          [4.45, 90],
+          [1.883, 54],
+          [1.85, 54],
+          [4.283, 77],
+          [3.95, 79],
+          [2.333, 64],
+          [4.15, 75],
+          [2.35, 47],
+          [4.933, 86],
+          [2.9, 63],
+          [4.583, 85],
+          [3.833, 82],
+          [2.083, 57],
+          [4.367, 82],
+          [2.133, 67],
+          [4.35, 74],
+          [2.2, 54],
+          [4.45, 83],
+          [3.567, 73],
+          [4.5, 73],
+          [4.15, 88],
+          [3.817, 80],
+          [3.917, 71],
+          [4.45, 83],
+          [2, 56],
+          [4.283, 79],
+          [4.767, 78],
+          [4.533, 84],
+          [1.85, 58],
+          [4.25, 83],
+          [1.983, 43],
+          [2.25, 60],
+          [4.75, 75],
+          [4.117, 81],
+          [2.15, 46],
+          [4.417, 90],
+          [1.817, 46],
+          [4.467, 74]
+        ]
+      }
+    ],
+    "xAxis": {
+      "type": "value",
+      "show": true,
+      "position": "bottom",
+      "name": "eruptions",
+      "nameLocation": "end",
+      "nameTextStyle": {},
+      "boundaryGap": [0, 0],
+      "scale": true,
+      "axisLine": {
+        "show": true,
+        "onZero": false
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLabel": {
+        "show": true
+      },
+      "splitLine": {
+        "show": true
+      },
+      "splitArea": {
+        "show": false
+      },
+      "data": []
+    },
+    "yAxis": {
+      "type": "value",
+      "show": true,
+      "position": "left",
+      "name": "waiting",
+      "nameLocation": "end",
+      "nameTextStyle": {},
+      "boundaryGap": [0, 0],
+      "scale": true,
+      "axisLine": {
+        "show": true,
+        "onZero": false
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLabel": {
+        "show": true
+      },
+      "splitLine": {
+        "show": true
+      },
+      "splitArea": {
+        "show": false
+      },
+      "data": []
+    }
+  },
+  "evals": []
+}</script></p>
+</div>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+    // active menu
+    var href = window.location.pathname;
+    href = href.substr(href.lastIndexOf('/') + 1);
+    if (href === '') href = './';
+    $('a[href="' + href + '"]').parent().addClass('active');
+});
+</script>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+
+</body>
+</html>

@@ -7,20 +7,8 @@
 #' @rdname eChart
 #' @export
 #' @examples library(recharts)
-#' ### scatter plot
 #' echart(iris, ~ Sepal.Length, ~ Sepal.Width)
 #' echart(iris, ~ Sepal.Length, ~ Sepal.Width, series = ~ Species)
-#'
-#' # bar chart
-#' bar_df = data.frame(
-#'    date = rep(paste("day",1:10), 2),
-#'    temperature = floor(rnorm(n = 20, mean = 20, sd = 10)),
-#'    location = rep(c("NY","DC"), each = 10)
-#'   )
-#' echart(bar_df, ~date, ~temperature, ~location)
-#'
-#' #line chart
-#' echart(bar_df, ~date, ~temperature, ~location, type="line")
 echart = function(data, ...) {
   UseMethod('echart')
 }

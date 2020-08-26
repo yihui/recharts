@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/yihui/recharts.svg)](https://travis-ci.org/yihui/recharts)
 
-This is a prototype of porting [ECharts](http://echarts.baidu.com) into R using **htmlwidgets**. I only spent a few days on it last year, and I hope more R users can contribute to it. To install this package (please use [R >= 3.2.0](http://cran.rstudio.com/)):
+This is a prototype of porting [Apache ECharts (incubating)](https://echarts.apache.org/) into R using **htmlwidgets**. I only spent a few days on it last year, and I hope more R users can contribute to it. To install this package (please use [R >= 3.2.0](http://cran.rstudio.com/)):
 
 ```r
 install.packages(
